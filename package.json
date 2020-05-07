@@ -1,0 +1,38 @@
+{
+  "name": "@appsomesolutions/pdf-on-site",
+  "version": "1.0.1",
+  "private": false,
+  "description": "RWD utils for conditional rendering and styled-components styling on given resolution breakpoints.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "tsc",
+    "deploy": "npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appsome-solutions/rwd-utils"
+  },
+  "keywords": [
+    "rwd",
+    "react",
+    "styled-components",
+    "media"
+  ],
+  "author": "Appsome Solutions",
+  "license": "MIT",
+  "homepage": "http://appsome-solutions.com/",
+  "dependencies": {
+    "@appsomesolutions/rwd-utils": "^1.0.4",
+    "@types/node": "^13.9.5",
+    "@types/react": "^16.9.26",
+    "@types/styled-components": "^5.0.1",
+    "react-pdf": "^4.1.0",
+    "styled-components": "^5.0.1",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
