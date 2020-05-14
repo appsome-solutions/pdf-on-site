@@ -17,6 +17,7 @@ E.g. person who:
  1. got invitation -> accepted-> answered -> said maybe later -> read offer more than 1
  
  more likely wants your services/product than person who:
+ 
  2. got invitation -> accepted-> answered -> said maybe later -> not read offer
  
 With that information you can focus more on a predefined customer groups which made additional step by clicking a link.
@@ -35,9 +36,11 @@ This solution is based on react, styled-components and react-pdf libraries.
 ### Installation
 
 With yarn:
+
 `yarn add @appsomesolutions/pdf-on-site`
 
 With npm:
+
 `npm install @appsomesolutions/pdf-on-site`
 
 ### Usage
@@ -50,6 +53,7 @@ import PdfOnSite from "@appsomesolutions/pdf-on-site";
 ````
 
 `pdfHref` - is our pdf location path (not relative, website path).
+
 `documentWidth` - exact document width in pixels
 
 ### Todo
