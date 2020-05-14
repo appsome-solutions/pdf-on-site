@@ -1,9 +1,11 @@
 import React from 'react';
 // @ts-ignore
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 
 import styled from 'styled-components';
 import { media } from '@appsomesolutions/rwd-utils';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const OfferWrapper = styled.div`
   display: flex;
@@ -27,7 +29,7 @@ const DownloadWrapper = styled.div`
     z-index: 2;
     margin-bottom: 0;
   `}
-  ${media.lg`
+  ${media.sm`
     position: static;
     margin-bottom: 24px;
   `}
@@ -44,6 +46,11 @@ const StyledLink = styled.a`
     color: #361d32;
     margin: 0;
   }
+  
+  svg {
+    padding: 16px;
+  }
+  
 `;
 
 const StyledDocument = styled(Document)`
@@ -53,7 +60,7 @@ const StyledDocument = styled(Document)`
     overflow: scroll;
     margin-bottom: 57px;
   `}
-  ${media.lg`
+  ${media.sm`
     overflow: auto;
     max-height: unset;
     max-width: unset;
@@ -66,9 +73,9 @@ type PdfOnSiteProps = {
     documentWidth?: number;
 };
 
-const PdfOnSite = ({ pdfHref, documentWidth= 1366 }: PdfOnSiteProps) => {
+const PdfOnSite: React.FC<PdfOnSiteProps> = ({ pdfHref, documentWidth= 1366 }) => {
 
-  const SCALE = documentWidth > window.innerWidth ? window.innerWidth / documentWidth : 1;
+  const SCALE = documentWidth > document.body.clientWidth ? document.body.clientWidth / documentWidth : 1;
 
   return (
       <OfferWrapper>

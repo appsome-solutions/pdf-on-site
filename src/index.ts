@@ -1,1 +1,3 @@
-export * from './PdfOnSite';
+import PdfOnSite from "./PdfOnSite";
+
+export default PdfOnSite;

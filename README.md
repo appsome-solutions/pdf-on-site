@@ -1,116 +1,65 @@
-rwd-utils is a library for easiest window width managing and media styling with react and styled-components.
+pdf-on-site is small library for rendering your pdf on site with a possibility to download it (supported mobile scaling).
 
-## Why?
-Most of the time you are using some RWD system based on grid or flexbox. 
-So if you want to create a 3 column view it will be easy for you, but if you would like to conditionally render component based on window media breakpoints it can be not provided by default in some of UI kits.
-That is why we created these utils for conditional breakpoints style changes or rendering changes.
-It means you can easily render a button on mobile but hide it on desktop or change its styling due to predefined breakpoints.
+![alt text](https://github.com/appsome-solutions/pdf-on-site/blob/master/pdf-on-site.png "pdf rendered on blank web page with download button at the top")
 
-## Usage
-### RWDProvider
+## Motivation
 
-First of all, we need to wrap our app with RWDProvider to inject context for our media and useRWD functionalities.
+Preview of what happen with your, sent pdf offer.
+
+## How it works?
+
+By using this tool you render pdf offer on your site in a Canvas (you can even copy a text from it).
+With that you can get 2 important information - who opened it and how many times. 
+Due to those data you can better identify your potential customer interest power by creating funnels.
+It means you can know which customer will more likely need your product or services.
+
+E.g. person who:
+ 1. got invitation -> accepted-> answered -> said maybe later -> read offer more than 1
+ 
+ more likely wants your services/product than person who:
+ 2. got invitation -> accepted-> answered -> said maybe later -> not read offer
+ 
+With that information you can focus more on a predefined customer groups which made additional step by clicking a link.
+
+## Benefits
+
+- information about who and how many times clicked your offer
+- creating remarketing groups e.g. for Facebook, Google Ads or Linkedin campaign
+- increased ratio of your main website visits
+
+## Solution
+
+### About
+This solution is based on react, styled-components and react-pdf libraries.
+
+### Installation
+
+With yarn:
+`yarn add @appsomesolutions/pdf-on-site`
+
+With npm:
+`npm install @appsomesolutions/pdf-on-site`
+
+### Usage
+
+Usage is very simple. We import it and use as normal component:
 ```javascript
-<RWDProvider>
- ...whole app
-</RWDProvider>
-```
+import PdfOnSite from "@appsomesolutions/pdf-on-site";
+//...
+<PdfOnSite pdfHref="/offer.pdf" documentWidth={1400} />
+````
 
-It can accept `breakpoints` object property which defines our desired app breakpoints we want to track. If we won't define them they will be set as default like here:
-```javascript
-breakpoints={{
-  xs: 0,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200,
-  xxl: 1440,
-  xxxl: 1600,
-}}
-```
+`pdfHref` - is our pdf location path (not relative, website path).
+`documentWidth` - exact document width in pixels
 
-If we have changed default breakpoints structure we just need to adjust types definition by extending module like:
+### Todo
 
-```typescript
-declare module '@appsomesolutions/rwd-utils' {
-  type MediaBreakpointsKeys = 'mobile' | 'tablet' | 'desktop';
+- [ ] Calculate pdf size before the render
+- [ ] Remove console warnings (according to this https://github.com/wojtekmaj/react-pdf/issues/495)
 
-  export const media: Record<MediaBreakpointsKeys, MediaCss>;
-
-  export const useRWD: () => {
-    less: Record<MediaBreakpointsKeys, boolean>;
-    more: Record<MediaBreakpointsKeys, boolean>;
-    width: number;
-  };
-}
-```
-
-### media.xyz\``
-
-Media is an object which keeps our breakpoints template literals functions to add predefined styles when given breakpoint occurs.
-Those breakpoints are mobile-first so styles you have added for mobile will be applied till their behavior will be overridden by biggest breakpoints.
-In practice it looks like:
-
-```typescript
-import styled from "styled-components";
-
-const MediaTestComponent = styled.h1`
-  ${media.xs`
-    background-color: blue;
-    display: block;
-  `}
-
-  ${media.md`
-    background-color: red;
-    display: block;
-  `}
-
-  ${media.xl`
-    display: none;
-  `}
-`;
-```
-
-Which will behave like:
-
-![alt text](https://github.com/appsome-solutions/rwd-utils/blob/master/media.gif "screen resized from mobile to desktop, first background color is blue, after reaching mobile breakpoint changes to red, after reaching desktop disappears")
-
-Awesome, isn't it?! 🎉
-
-### useRWD()
-
-useRWD() is a hook that gives us information if given breakpoint is fulfilled or not with `less` than or `more` than an object. Additionally, we can directly read width value with it.
-
-Like example below shows:
-
-```typescript
-const UseRwdTestComponent = () => {
-  const { less, more, width } = useRWD();
-
-  return (
-    <>
-      {less.md && <div> Less than medium </div>}
-      {more.md && <div> More than medium </div>}
-      <div>{width}</div>
-    </>
-  );
-};
-```
-
-Result of such code can be conditionally elements or with displayed in real-time when resized screen:
-
-![alt text](https://github.com/appsome-solutions/rwd-utils/blob/master/useRWD.gif "screen resized from mobile to desktop, less than medium text rendered when the screen is below medium size, more than medium is displayed when scree is above medium width and counter of window width changes dynamically when resizing")
-
-❗ useRWD is a dynamic solution if you plan to create Static Page or SSR read below section
-
-## Server Side Rendering or Static Pages
-
-useRWD is a dynamic solution which means it first needs to load the page, retrieves information about screen size and then it starts to be working.
-If you plan to do your site as a Static Page or render it on the server then you won't be able to access `window` property and it will be empty.
-That is why if can, try to always use `media.breakpoint`` `   instead of useRWD or definitely say "I won't use SSR or Static Page now and in future".
 
 ## Life example
-[Code Sandox](https://codesandbox.io/s/appsome-solutionsrwd-utils-twjm1?file=/src/App.tsx)
+[Code Sandox](https://codesandbox.io/s/appsomesolutionspdf-on-site-iy7t6)
 
 ## Appsome Solutions
 All thanks for [Appsome Solutions](https://www.appsome-solutions.com/) - Software Development Company from Poland for sharing their code and knowledge with the community for free ❤
