@@ -4,7 +4,7 @@ pdf-on-site is small library for rendering your pdf on site with a possibility t
 
 ## Motivation
 
-Preview of what happen with your, sent pdf offer.
+Preview of what happens with your, sent pdf offer.
 
 ## How it works?
 
